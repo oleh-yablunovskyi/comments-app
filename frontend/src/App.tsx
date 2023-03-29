@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import './App.scss';
 import { CommentsList } from './components/CommentsList/CommentsList';
-import { commentsFromServer } from './mockup_data/comments';
+import { commentsApi } from './api/comments';
 import { CommentType } from './types/CommentType';
 
 export const App: React.FC = () => {
   const [comments, setComments] = useState<CommentType[]>([]);
 
   useEffect(() => {
-    setComments(commentsFromServer);
+    setComments(commentsApi.loadComments());
   }, []);
 
   return (
