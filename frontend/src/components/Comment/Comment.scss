@@ -1,0 +1,97 @@
+.Comment {
+  &__wrapper {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    margin: 5px 0;
+
+    border: 1px solid #e1e7ed;
+    border-radius: 8px;
+    box-shadow: 0 0.5em 1em -0.125em rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.02);
+  }
+
+  &__avatar {
+    width: 50px;
+    height: 50px;
+
+    @media (max-width: 767px) {
+      left: -50px;
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  &__header {
+    position: relative;
+    margin-bottom: 7px;
+  }
+
+  &__authorName {
+    margin-right: 15px;
+
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+  }
+
+  &__date {
+    font-size: 14px;
+  }
+
+  &__text {
+    margin-bottom: 7px;
+  }
+
+  &__answerButton {
+    margin-bottom: 16px;
+    padding-bottom: 2px;
+
+    border-bottom: 1px solid #a7b7dd;
+    color: #244696;
+    transition: all 0.3s ease;
+
+    &:hover {
+      color: #db0107;
+      border-bottom-color: #db0107;
+    }
+  }
+
+  &--level-1 {
+    margin-left: 0;
+  }
+  &--level-2 {
+    margin-left: 50px;
+  }
+  &--level-3 {
+    margin-left: 100px;
+  }
+  &--level-4 {
+    margin-left: 150px;
+  }
+  &--level-5 {
+    margin-left: 200px;
+  }
+  &--level-6 {
+    margin-left: 250px;
+  }
+  &--level-7 {
+    margin-left: 300px;
+  }
+  &--level-8 {
+    margin-left: 350px;
+  }
+  &--level-9 {
+    margin-left: 400px;
+  }
+  &--level-10 {
+    margin-left: 450px;
+  }
+
+  @media (max-width: 767px) {
+    margin-left: 50px;
+
+    &--level-1 {
+      margin-left: 0;
+    }
+  }
+}
