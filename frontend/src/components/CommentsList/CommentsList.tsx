@@ -3,16 +3,17 @@ import { CommentType } from '../../types/CommentType';
 import { Comment } from '../Comment/Comment';
 
 interface Props {
-  comments: CommentType[];
+  topComments: CommentType[];
 }
 
-export const CommentsList: React.FC<Props> = React.memo(({ comments }) => {
+export const CommentsList: React.FC<Props> = React.memo(({ topComments }) => {
   return (
     <div className="CommentsList">
-      {comments.map((comment) => (
+      {topComments.map((topComment) => (
         <Comment
-          comment={comment}
-          key={comment.id}
+          comment={topComment}
+          level={1}
+          key={topComment.id}
         />
       ))}
     </div>
