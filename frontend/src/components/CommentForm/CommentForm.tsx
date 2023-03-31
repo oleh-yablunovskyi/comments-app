@@ -22,6 +22,22 @@ export const CommentForm = () => {
     setFormData((prevData) => ({ ...prevData, [id]: value }));
   };
 
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { files } = event.target;
+
+    const imageFile = files ? files[0] : null;
+
+    setFormData((prevData) => ({ ...prevData, imageFile }));
+  };
+
+  const handleTextFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { files } = event.target;
+
+    const textFile = files ? files[0] : null;
+
+    setFormData((prevData) => ({ ...prevData, textFile }));
+  };
+
   const resetFormData = () => {
     setFormData(initialFormData);
   };
@@ -120,6 +136,7 @@ export const CommentForm = () => {
             id="imageFile"
             accept="image/jpeg,image/gif,image/png"
             className="Form__input Form__inputFile"
+            onChange={handleImageUpload}
           />
         </label>
       </div>
@@ -135,6 +152,7 @@ export const CommentForm = () => {
             id="textFile"
             accept=".txt"
             className="Form__input Form__inputFile"
+            onChange={handleTextFileUpload}
           />
         </label>
       </div>
