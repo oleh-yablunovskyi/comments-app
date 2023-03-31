@@ -47,6 +47,13 @@
     border: none;
   }
 
+  &__tagPanel {
+    display: flex;
+    justify-content: flex-start;
+    gap: 5px;
+    margin-bottom: 7px;
+  }
+
   &__tagButton {
     background-color: #f5f5f5;
     border: 1px solid #ccc;

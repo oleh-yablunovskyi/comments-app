@@ -115,6 +115,13 @@ export const CommentForm = () => {
         </label>
 
         <div className="Form__messageBlock">
+          <div className="Form__tagPanel">
+            <button type="button" className="Form__tagButton" data-tag="i">i</button>
+            <button type="button" className="Form__tagButton" data-tag="strong">strong</button>
+            <button type="button" className="Form__tagButton" data-tag="code">code</button>
+            <button type="button" className="Form__tagButton" data-tag="a">a</button>
+          </div>
+
           <textarea
             id="message"
             required
