@@ -1,7 +1,9 @@
+/* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
 import './Comment.scss';
 import { CommentType } from '../../types/CommentType';
 import { commentsApi } from '../../api/comments';
+import { CommentForm } from '../CommentForm/CommentForm';
 
 interface Props {
   comment: CommentType;
@@ -50,6 +52,8 @@ export const Comment: React.FC<Props> = React.memo(({ comment, level }) => {
         >
           {showForm ? '— Answer' : 'Answer'}
         </button>
+
+        {showForm && <CommentForm />}
       </div>
 
       <>
