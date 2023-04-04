@@ -8,7 +8,9 @@ module.exports = {
   },
   rules: {
     'no-proto': 0,
-    "object-curly-newline": "off"
+    "object-curly-newline": "off",
+    "no-console": "off",
+    "max-len": "off"
   },
   plugins: ['jest']
 };

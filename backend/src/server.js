@@ -4,6 +4,9 @@
 const express = require('express');
 const cors = require('cors');
 
+const createUsersTable = require('./migrations/createUsersTable');
+const createCommentsTable = require('./migrations/createCommentsTable');
+
 const app = express();
 
 app.use(cors());
@@ -17,6 +20,15 @@ app.get('/comments', (req, res) => {
 // Start the server
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+(async() => {
+  try {
+    await createUsersTable();
+    await createCommentsTable();
+
+    app.listen(PORT, () => {
+      console.log(`Server is running on http://localhost:${PORT}`);
+    });
+  } catch (error) {
+    console.error('Error while creating tables:', error);
+  }
+})();
