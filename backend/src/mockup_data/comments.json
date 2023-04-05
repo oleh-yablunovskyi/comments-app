@@ -1,0 +1,173 @@
+[
+  {
+  "id": 1,
+  "parent_comment_id": null,
+  "user_id": 1,
+  "text": "I really enjoy going for walks in the park, especially during springtime. The flowers are so beautiful! Yesterday, I even spotted a family of ducks swimming in the pond. It's such a peaceful place to spend an afternoon.",
+  "created_at": "2023-03-28T14:32:00.000Z",
+  "image_link": null,
+  "text_file_link": null
+  },
+  {
+  "id": 2,
+  "parent_comment_id": null,
+  "user_id": 2,
+  "text": "Does anyone have any book recommendations?",
+  "created_at": "2023-03-27T18:47:00.000Z",
+  "image_link": null,
+  "text_file_link": null
+  },
+  {
+  "id": 3,
+  "parent_comment_id": null,
+  "user_id": 3,
+  "text": "I've been trying out new recipes lately. Last night, I made a delicious vegetable stir-fry with bell peppers, onions, and broccoli. It turned out great and was pretty easy to make!",
+  "created_at": "2023-03-25T20:11:00.000Z",
+  "image_link": null,
+  "text_file_link": null
+  },
+  {
+  "id": 4,
+  "parent_comment_id": null,
+  "user_id": 4,
+  "text": "I just watched a fascinating documentary about space exploration. The universe is so vast and mysterious!",
+  "created_at": "2023-03-22T11:05:00.000Z",
+  "image_link": null,
+  "text_file_link": null
+  },
+  {
+  "id": 5,
+  "parent_comment_id": null,
+  "user_id": 5,
+  "text": "Has anyone tried yoga?",
+  "created_at": "2023-03-21T09:22:00.000Z",
+  "image_link": null,
+  "text_file_link": null
+  },
+  {
+  "id": 6,
+  "parent_comment_id": null,
+  "user_id": 1,
+  "text": "I've been learning to play the guitar recently, and it's so rewarding! It's amazing how music can bring people together.",
+  "created_at": "2023-03-20T16:43:00.000Z",
+  "image_link": null,
+  "text_file_link": null
+  },
+  {
+  "id": 7,
+  "parent_comment_id": null,
+  "user_id": 2,
+  "text": "What's your favorite season?",
+  "created_at": "2023-03-19T19:25:00.000Z",
+  "image_link": null,
+  "text_file_link": null
+  },
+  {
+  "id": 8,
+  "parent_comment_id": null,
+  "user_id": 3,
+  "text": "I started painting with watercolors last month, and I'm really enjoying it! It's a relaxing and creative outlet for me after a long day at work.",
+  "created_at": "2023-03-18T12:34:00.000Z",
+  "image_link": null,
+  "text_file_link": null
+  },
+  {
+  "id": 9,
+  "parent_comment_id": null,
+  "user_id": 4,
+  "text": "Anyone here like photography?",
+  "created_at": "2023-03-17T10:16:00.000Z",
+  "image_link": null,
+  "text_file_link": null
+  },
+  {
+  "id": 10,
+  "parent_comment_id": null,
+  "user_id": 5,
+  "text": "I visited a local art exhibit last weekend, and it was inspiring to see all the incredible talent in our community. The paintings, sculptures, and installations were all so diverse and thought-provoking.",
+  "created_at": "2023-03-16T15:42:00.000Z",
+  "image_link": null,
+  "text_file_link": null
+  },
+  {
+  "id": 12,
+  "parent_comment_id": 2,
+  "user_id": 3,
+  "text": "I recently read 'The Nightingale' by Kristin Hannah. It's an amazing historical fiction novel, highly recommended!",
+  "created_at": "2023-03-27T19:34:00.000Z",
+  "image_link": null,
+  "text_file_link": null
+  },
+  {
+  "id": 13,
+  "parent_comment_id": 2,
+  "user_id": 5,
+  "text": "If you're into mystery, I suggest checking out 'The Silent Patient' by Alex Michaelides. I couldn't put it down!",
+  "created_at": "2023-03-28T10:18:00.000Z",
+  "image_link": null,
+  "text_file_link": null
+  },
+  {
+  "id": 15,
+  "parent_comment_id": 5,
+  "user_id": 4,
+  "text": "I've been practicing yoga for a few years now. It has really helped me with flexibility and stress management. You should give it a try!",
+  "created_at": "2023-03-21T14:54:00.000Z",
+  "image_link": null,
+  "text_file_link": null
+  },
+  {
+  "id": 18,
+  "parent_comment_id": 9,
+  "user_id": 5,
+  "text": "I'm a photography enthusiast! I mostly enjoy taking pictures of landscapes and wildlife. What about you?",
+  "created_at": "2023-03-17T13:08:00.000Z",
+  "image_link": null,
+  "text_file_link": null
+  },
+  {
+  "id": 19,
+  "parent_comment_id": 15,
+  "user_id": 3,
+  "text": "I completely agree! Yoga has been a game changer for me too, especially in terms of mental clarity and balance. Does anyone have any recommendations for beginners?",
+  "created_at": "2023-03-21T15:20:00.000Z",
+  "image_link": null,
+  "text_file_link": null
+  },
+  {
+  "id": 20,
+  "parent_comment_id": 19,
+  "user_id": 1,
+  "text": "For beginners, I'd suggest starting with some basic poses like the child's pose, downward-facing dog, and mountain pose. Don't push yourself too hard in the beginning and try to focus on your breath. Online resources and videos can be a great way to start!",
+  "created_at": "2023-03-21T16:05:00.000Z",
+  "image_link": null,
+  "text_file_link": null
+  },
+  {
+  "id": 21,
+  "parent_comment_id": 20,
+  "user_id": 5,
+  "text": "Thank you for the suggestions! I'll definitely look into online resources and videos. It's nice to know there are some simple poses to start with.",
+  "created_at": "2023-03-21T17:15:00.000Z",
+  "image_link": null,
+  "text_file_link": null
+  },
+  {
+  "id": 22,
+  "parent_comment_id": 21,
+  "user_id": 2,
+  "text": "Once you become comfortable with the basic poses, you can try joining a local yoga class or studio. It's a great way to meet new people and learn from experienced instructors!",
+  "created_at": "2023-03-21T18:30:00.000Z",
+  "image_link": null,
+  "text_file_link": null
+  },
+  {
+  "id": 23,
+  "parent_comment_id": 22,
+  "user_id": 4,
+  "text": "That's true! Joining a local class helped me a lot in improving my practice and understanding the correct alignment of poses. Plus, it's motivating to practice with others!",
+  "created_at": "2023-03-21T19:45:00.000Z",
+  "image_link": null,
+  "text_file_link": null
+  }
+]

@@ -6,6 +6,8 @@ const cors = require('cors');
 
 const createUsersTable = require('./migrations/createUsersTable');
 const createCommentsTable = require('./migrations/createCommentsTable');
+const seedUsers = require('./seeders/seedUsers');
+const seedComments = require('./seeders/seedComments');
 
 const app = express();
 
@@ -23,7 +25,10 @@ const PORT = process.env.PORT || 5000;
 (async() => {
   try {
     await createUsersTable();
+    await seedUsers();
+
     await createCommentsTable();
+    await seedComments();
 
     app.listen(PORT, () => {
       console.log(`Server is running on http://localhost:${PORT}`);
