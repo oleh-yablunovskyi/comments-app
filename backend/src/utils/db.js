@@ -13,6 +13,18 @@ if (!DATABASE_URL) {
 
 const sequelize = new Sequelize(DATABASE_URL, {
   dialect: 'postgres',
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
+  },
+  logging: false,
+  // logging: (msg) => {
+  //   console.log('\n--- Executing SQL Query ---\n');
+  //   console.log(msg);
+  //   console.log('\n--- End of SQL Query ---\n');
+  // },
 });
 
 module.exports = sequelize;
