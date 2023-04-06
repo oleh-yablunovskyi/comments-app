@@ -1,23 +1,39 @@
+/* eslint-disable no-console */
+import axios from 'axios';
 import { CommentType } from '../types/CommentType';
-import { commentsFromServer } from '../mockup_data/comments';
 
-const loadTopComments = (): CommentType[] => {
-  return commentsFromServer.filter(c => c.parentId === null);
+const BASE_URL = 'http://localhost:5000';
+
+const getTopComments = async (): Promise<CommentType[]> => {
+  const response = await axios
+    .get(`${BASE_URL}/comments`);
+
+  return response.data;
 };
 
-const loadCommentsByParentId = (parentId: number | null): CommentType[] => {
-  if (!parentId) {
-    return [];
-  }
+const getChildrenCommentsByID = async (id: number): Promise<CommentType[]> => {
+  const response = await axios
+    .get(`${BASE_URL}/comments/${id}/children`);
 
-  return commentsFromServer
-    .filter(comment => comment.parentId === parentId)
-    .sort((a, b) => (
-      new Date(a.createdAt).valueOf() - new Date(b.createdAt).valueOf()
-    ));
+  return response.data;
+};
+
+const createComment = async (payload: FormData) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/comments`, payload, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    console.log('Comment submitted successfully', response.data);
+  } catch (error) {
+    console.error('Error submitting comment:', error);
+  }
 };
 
 export const commentsApi = {
-  loadTopComments,
-  loadCommentsByParentId,
+  getTopComments,
+  getChildrenCommentsByID,
+  createComment,
 };

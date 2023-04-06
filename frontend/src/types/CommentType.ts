@@ -1,16 +1,17 @@
-// export interface CommentType {
-//   id: number;
-//   parentId: number | null;
-//   createdAt: string;
-//   text: string;
-// }
-
 export interface CommentType {
   id: number;
-  parentId: number | null;
-  userId: number;
+  parent_comment_id: number | null;
+  user_id: number;
   text: string;
-  createdAt: string;
-  imageLink: string | null;
-  textFileLink: string | null;
+  created_at: string;
+  image_link: string | null;
+  text_file_link: string | null;
+  author: UserType;
+}
+
+interface UserType {
+  id: number;
+  user_name: string;
+  email: string;
+  home_page: string | null;
 }

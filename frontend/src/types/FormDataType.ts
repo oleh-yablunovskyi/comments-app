@@ -3,6 +3,7 @@ export interface FormDataType {
   email: string;
   homePage: string;
   message: string;
+  parentId: string | null,
   imageFile: File | null;
   textFile: File | null;
 }

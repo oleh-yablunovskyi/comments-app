@@ -1,14 +1,28 @@
+/* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
 import './App.scss';
 import { CommentsList } from './components/CommentsList/CommentsList';
+import { CommentForm } from './components/CommentForm/CommentForm';
 import { commentsApi } from './api/comments';
 import { CommentType } from './types/CommentType';
 
 export const App: React.FC = () => {
   const [topComments, setTopComments] = useState<CommentType[]>([]);
 
+  const loadTopComments = async () => {
+    try {
+      const comments = await commentsApi.getTopComments();
+
+      console.log('Loaded topComments:', comments);
+
+      setTopComments(comments);
+    } catch (error) {
+      console.error('Error loading top comments:', error);
+    }
+  };
+
   useEffect(() => {
-    setTopComments(commentsApi.loadTopComments());
+    loadTopComments();
   }, []);
 
   return (
@@ -18,6 +32,10 @@ export const App: React.FC = () => {
 
         <div className="App__main">
           <CommentsList topComments={topComments} />
+        </div>
+
+        <div className="App__bottom">
+          <CommentForm onSubmitLoadComments={loadTopComments} />
         </div>
       </div>
     </div>
