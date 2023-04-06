@@ -47,6 +47,39 @@ app.get('/comments', async(req, res) => {
   }
 });
 
+// Get childrenComments endpoint
+app.get('/comments/:id/children', async(req, res) => {
+  const parentId = Number(req.params.id);
+
+  try {
+    // Fetch child-comments and add authors to them
+    const childComments = await Comment.findAll({
+      where: {
+        parent_comment_id: parentId,
+      },
+      include: [
+        {
+          model: User,
+          attributes: ['id', 'user_name', 'email', 'home_page'],
+          as: 'author',
+        },
+      ],
+      order: [
+        ['created_at', 'ASC'],
+      ],
+    });
+
+    if (!childComments || childComments.length === 0) {
+      return res.send([]);
+    }
+
+    res.send(childComments);
+  } catch (err) {
+    console.error('Error fetching child comments:', err);
+    res.status(500).send('Internal server error');
+  }
+});
+
 // Start the server
 const PORT = process.env.PORT || 5000;
 
