@@ -1,6 +1,10 @@
 /* eslint-disable no-console */
 import React, { useState } from 'react';
 import './CommentForm.scss';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import { sanitizeMessage } from '../../utils/sanitizeMessage';
+import { modules, formats } from './quillConfig';
 import { Loader } from '../Loader/Loader';
 import { FormDataType } from '../../types/FormDataType';
 import { commentsApi } from '../../api/comments';
@@ -26,14 +30,18 @@ export const CommentForm: React.FC<Props> = ({
   onSubmitHideForm,
   parentId = null,
 }) => {
-  const [count, setCount] = useState(0);
-  const [formData, setFormData] = useState<FormDataType>(initialFormData);
+  const [formData, setFormData] = useState<FormDataType>({ ...initialFormData, parentId });
   const [isLoading, setIsLoading] = useState(false);
+  const [count, setCount] = useState(0);
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = event.target;
 
     setFormData((prevData) => ({ ...prevData, [id]: value }));
+  };
+
+  const handleMessageChange = (value: string) => {
+    setFormData((prevData) => ({ ...prevData, message: value }));
   };
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,16 +70,20 @@ export const CommentForm: React.FC<Props> = ({
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
     setIsLoading(true);
 
-    const updatedFormData = { ...formData, parentId };
+    const sanitizedMessage = sanitizeMessage(formData.message);
 
-    console.log('updatedFormData when submitting:', updatedFormData);
+    const preparedFormData: FormDataType = {
+      ...formData,
+      message: sanitizedMessage,
+    };
+
+    console.log('preparedFormData when submitting:', preparedFormData);
 
     const payload = new FormData();
 
-    Object.entries(updatedFormData).forEach(([key, value]) => {
+    Object.entries(preparedFormData).forEach(([key, value]) => {
       if (value !== null) {
         payload.append(key, value);
       }
@@ -80,13 +92,13 @@ export const CommentForm: React.FC<Props> = ({
     await commentsApi.createComment(payload);
     await onSubmitLoadComments();
 
-    if (onSubmitHideForm) {
-      onSubmitHideForm();
-    }
-
     setCount((prevCount => prevCount + 1));
     resetFormData();
     setIsLoading(false);
+
+    if (onSubmitHideForm) {
+      onSubmitHideForm();
+    }
   };
 
   return (
@@ -147,20 +159,13 @@ export const CommentForm: React.FC<Props> = ({
               </label>
 
               <div className="Form__messageBlock">
-                <div className="Form__tagPanel">
-                  <button type="button" className="Form__tagButton" data-tag="i">i</button>
-                  <button type="button" className="Form__tagButton" data-tag="strong">strong</button>
-                  <button type="button" className="Form__tagButton" data-tag="code">code</button>
-                  <button type="button" className="Form__tagButton" data-tag="a">a</button>
-                </div>
-
-                <textarea
-                  id="message"
-                  required
-                  className="Form__textarea"
-                  onChange={handleInputChange}
-                >
-                </textarea>
+                <ReactQuill
+                  value={formData.message}
+                  onChange={handleMessageChange}
+                  modules={modules}
+                  formats={formats}
+                  theme="snow"
+                />
               </div>
             </div>
 
