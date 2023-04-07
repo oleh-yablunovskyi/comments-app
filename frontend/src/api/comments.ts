@@ -2,7 +2,8 @@
 import axios from 'axios';
 import { CommentType } from '../types/CommentType';
 
-const BASE_URL = 'http://localhost:5000';
+const BASE_URL = 'https://comments-app-server.onrender.com';
+// const BASE_URL = 'http://localhost:5000';
 
 const getTopComments = async (): Promise<CommentType[]> => {
   const response = await axios
