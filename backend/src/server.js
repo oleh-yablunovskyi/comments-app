@@ -3,17 +3,23 @@
 
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
+
 const { User, Comment } = require('./models/associations');
 const setupDatabase = require('./main');
+const createFolderIfNotExists = require('./utils/createFolderIfNotExists');
+const upload = require('./utils/multerConfig');
 
-// Multer
-const multer = require('multer');
-const upload = multer();
+createFolderIfNotExists(path.join(__dirname, 'uploads', 'images'));
+createFolderIfNotExists(path.join(__dirname, 'uploads', 'text'));
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+// Serve Uploaded Files endpoint
+app.use('/uploads', express.static('uploads'));
 
 // Get topComments endpoint
 app.get('/comments', async(req, res) => {
@@ -81,7 +87,7 @@ app.get('/comments/:id/children', async(req, res) => {
 });
 
 // Create newComment endpoint
-app.post('/comments', upload.none(), async(req, res) => {
+app.post('/comments', upload.fields([{ name: 'imageFile' }, { name: 'textFile' }]), async(req, res) => {
   const {
     userName,
     email,
@@ -105,13 +111,24 @@ app.post('/comments', upload.none(), async(req, res) => {
       });
     }
 
+    // Get the uploaded files links
+    const { imageFile, textFile } = req.files;
+
+    const imageLink = imageFile
+      ? `uploads/images/${imageFile[0].filename}`
+      : null;
+
+    const textFileLink = textFile
+      ? `uploads/text/${textFile[0].filename}`
+      : null;
+
     // Create a new comment with the provided data
     const newComment = await Comment.create({
       user_id: user.id,
       text: message,
       parent_comment_id: Number(parentId) || null,
-      image_link: null,
-      text_file_link: null,
+      image_link: imageLink,
+      text_file_link: textFileLink,
     });
 
     // Fetch the newly created comment with the author
