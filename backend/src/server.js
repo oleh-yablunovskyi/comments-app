@@ -11,6 +11,8 @@ const commentValidationRules = require('./validations/commentValidationRules');
 const setupDatabase = require('./main');
 const createFolderIfNotExists = require('./utils/createFolderIfNotExists');
 const upload = require('./utils/multerConfig');
+const resizeAndSaveImage = require('./middlewares/resizeAndSaveImage');
+const saveTextFile = require('./middlewares/saveTextFile');
 
 createFolderIfNotExists(path.join(__dirname, 'uploads', 'images'));
 createFolderIfNotExists(path.join(__dirname, 'uploads', 'text'));
@@ -88,10 +90,8 @@ app.get('/comments/:id/children', async(req, res) => {
   }
 });
 
-console.log('commentValidationRules:', commentValidationRules);
-
 // Create newComment endpoint
-app.post('/comments', upload.fields([{ name: 'imageFile' }, { name: 'textFile' }]), commentValidationRules, async(req, res) => {
+app.post('/comments', upload.fields([{ name: 'imageFile' }, { name: 'textFile' }]), resizeAndSaveImage, saveTextFile, commentValidationRules, async(req, res) => {
   const {
     userName,
     email,
@@ -99,8 +99,6 @@ app.post('/comments', upload.fields([{ name: 'imageFile' }, { name: 'textFile' }
     parentId,
     message,
   } = req.body;
-
-  console.log(req.body);
 
   const errors = validationResult(req);
 
