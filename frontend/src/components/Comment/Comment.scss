@@ -5,6 +5,7 @@
     display: flex;
     gap: 20px;
     padding: 20px;
+    padding-bottom: 0;
     margin: 5px 0;
 
     border: 1px solid #e1e7ed;
@@ -21,6 +22,10 @@
       width: 40px;
       height: 40px;
     }
+  }
+
+  &__body {
+    flex-grow: 1;
   }
 
   &__header {
@@ -41,7 +46,34 @@
   }
 
   &__text {
-    margin-bottom: 7px;
+    margin-bottom: 20px;
+  }
+
+  &__attachments {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  &__attachedImage {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  &__fileIcon {
+    width: 30px;
+    height: 30px;
+    background-image: url('./icons/file-regular.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    cursor: pointer;
+    display: inline-block;
   }
 
   &__answerButton {

@@ -5,6 +5,8 @@ import { CommentType } from '../../types/CommentType';
 import { commentsApi } from '../../api/comments';
 import { CommentForm } from '../CommentForm/CommentForm';
 
+const BASE_URL = 'https://comments-app-server.onrender.com';
+
 interface Props {
   comment: CommentType;
   level: number;
@@ -14,7 +16,7 @@ export const Comment: React.FC<Props> = React.memo(({ comment, level }) => {
   const [childrenComments, setChildrenComments] = useState<CommentType[]>([]);
   const [showForm, setShowForm] = useState(false);
 
-  const { id } = comment;
+  const { id, image_link, text_file_link } = comment;
 
   const loadChildrenComments = async () => {
     try {
@@ -29,6 +31,18 @@ export const Comment: React.FC<Props> = React.memo(({ comment, level }) => {
   useEffect(() => {
     loadChildrenComments();
   }, [id]);
+
+  const handleImageClick = (imageLink: string | null) => {
+    if (imageLink) {
+      window.open(`${BASE_URL}/${imageLink}`, '_blank');
+    }
+  };
+
+  const handleTextFileClick = (textFileLink: string | null) => {
+    if (textFileLink) {
+      window.open(`${BASE_URL}/${textFileLink}`, '_blank');
+    }
+  };
 
   return (
     <>
@@ -55,6 +69,29 @@ export const Comment: React.FC<Props> = React.memo(({ comment, level }) => {
               className="Comment__text"
               dangerouslySetInnerHTML={{ __html: comment.text }}
             />
+
+            {(image_link || text_file_link) && (
+              <div className="Comment__attachments">
+                <span>Files attached:</span>
+
+                {image_link && (
+                  <img
+                    className="Comment__attachedImage"
+                    src={`${BASE_URL}/${image_link}`}
+                    alt="Attachment"
+                    onClick={() => handleImageClick(image_link)}
+                  />
+                )}
+
+                {text_file_link && (
+                  <div
+                    className="Comment__fileIcon"
+                    onClick={() => handleTextFileClick(text_file_link)}
+                  >
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
 
