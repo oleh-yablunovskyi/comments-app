@@ -1,7 +1,7 @@
 'use strict';
 
 const multer = require('multer');
-const path = require('path');
+// const path = require('path');
 
 const allowedImageMimeTypes = ['image/jpeg', 'image/gif', 'image/png'];
 const maxTextFileSize = 100 * 1024; // 100 KB
@@ -35,33 +35,7 @@ const fileFilter = (_req, file, cb) => {
   }
 };
 
-const getDestination = (_req, file, cb) => {
-  const baseDir = path.join(__dirname, '..', 'uploads');
-  let targetDir;
-
-  switch (file.fieldname) {
-    case 'imageFile':
-      targetDir = path.join(baseDir, 'images');
-      break;
-
-    case 'textFile':
-      targetDir = path.join(baseDir, 'text');
-      break;
-
-    default:
-      return cb(new Error('Invalid field name'));
-  }
-
-  cb(null, targetDir);
-};
-
-const storage = multer.diskStorage({
-  destination: getDestination,
-  filename: (_req, file, cb) => {
-    cb(null, `${Date.now()}-${file.originalname}`);
-  },
-});
-
-const upload = multer({ storage, fileFilter });
+const storage = multer.memoryStorage();
+const upload = multer({ storage, fileFilter, limits: { fileSize: 5 * 1024 * 1024 } }); // 5 MB file size limit
 
 module.exports = upload;
