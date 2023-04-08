@@ -4,6 +4,9 @@ import './Comment.scss';
 import { CommentType } from '../../types/CommentType';
 import { commentsApi } from '../../api/comments';
 import { CommentForm } from '../CommentForm/CommentForm';
+import { ModalWindow } from '../ModalWindow/ModalWindow';
+
+const BASE_URL = 'https://comments-app-server.onrender.com';
 
 interface Props {
   comment: CommentType;
@@ -13,8 +16,11 @@ interface Props {
 export const Comment: React.FC<Props> = React.memo(({ comment, level }) => {
   const [childrenComments, setChildrenComments] = useState<CommentType[]>([]);
   const [showForm, setShowForm] = useState(false);
+  const [isImageModalOpen, setImageModalOpen] = useState(false);
+  const [isTextModalOpen, setTextModalOpen] = useState(false);
+  const [textModalContent, setTextModalContent] = useState('File is empty');
 
-  const { id } = comment;
+  const { id, image_link, text_file_link } = comment;
 
   const loadChildrenComments = async () => {
     try {
@@ -26,9 +32,41 @@ export const Comment: React.FC<Props> = React.memo(({ comment, level }) => {
     }
   };
 
+  const loadTextFileContent = async (fileLink: string) => {
+    try {
+      const response = await fetch(fileLink);
+      const text = await response.text();
+
+      return text;
+    } catch (error) {
+      console.error('Error loading text file:', error);
+
+      return 'Error loading text file';
+    }
+  };
+
   useEffect(() => {
     loadChildrenComments();
   }, [id]);
+
+  const handleImageClick = () => {
+    setImageModalOpen(true);
+  };
+
+  const handleTextFileClick = async () => {
+    setTextModalOpen(true);
+    const text = await loadTextFileContent(`${BASE_URL}/${text_file_link}`);
+
+    setTextModalContent(text);
+  };
+
+  const closeImageModal = () => {
+    setImageModalOpen(false);
+  };
+
+  const closeTextModal = () => {
+    setTextModalOpen(false);
+  };
 
   return (
     <>
@@ -36,8 +74,8 @@ export const Comment: React.FC<Props> = React.memo(({ comment, level }) => {
         <div className="Comment__wrapper">
           <img
             className="Comment__avatar"
-            src={`https://avatars.dicebear.com/api/human/${id}.svg`}
-            alt=""
+            src={`https://avatars.dicebear.com/api/human/${comment.author.email}.svg`}
+            alt="User avatar"
           />
 
           <div className="Comment__body">
@@ -55,6 +93,50 @@ export const Comment: React.FC<Props> = React.memo(({ comment, level }) => {
               className="Comment__text"
               dangerouslySetInnerHTML={{ __html: comment.text }}
             />
+
+            {(image_link || text_file_link) && (
+              <div className="Comment__attachments">
+                <span>Files attached:</span>
+
+                {image_link && (
+                  <img
+                    className="Comment__attachedImage"
+                    src={`${BASE_URL}/${image_link}`}
+                    alt="Attached"
+                    onClick={handleImageClick}
+                  />
+                )}
+
+                {text_file_link && (
+                  <div
+                    className="Comment__fileIcon"
+                    onClick={handleTextFileClick}
+                  >
+                  </div>
+                )}
+              </div>
+            )}
+
+            <>
+              {isImageModalOpen && (
+                <ModalWindow
+                  isOpen={isImageModalOpen}
+                  onClose={closeImageModal}
+                  fileType="image"
+                  fileSrc={`${BASE_URL}/${image_link}`}
+                />
+              )}
+
+              {isTextModalOpen && (
+                <ModalWindow
+                  isOpen={isTextModalOpen}
+                  onClose={closeTextModal}
+                  fileType="text"
+                  fileSrc={`${BASE_URL}/${text_file_link}`}
+                  textContent={textModalContent}
+                />
+              )}
+            </>
           </div>
         </div>
 
