@@ -4,8 +4,10 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const { validationResult } = require('express-validator');
 
 const { User, Comment } = require('./models/associations');
+const commentValidationRules = require('./validations/commentValidationRules');
 const setupDatabase = require('./main');
 const createFolderIfNotExists = require('./utils/createFolderIfNotExists');
 const upload = require('./utils/multerConfig');
@@ -86,8 +88,10 @@ app.get('/comments/:id/children', async(req, res) => {
   }
 });
 
+console.log('commentValidationRules:', commentValidationRules);
+
 // Create newComment endpoint
-app.post('/comments', upload.fields([{ name: 'imageFile' }, { name: 'textFile' }]), async(req, res) => {
+app.post('/comments', upload.fields([{ name: 'imageFile' }, { name: 'textFile' }]), commentValidationRules, async(req, res) => {
   const {
     userName,
     email,
@@ -95,6 +99,14 @@ app.post('/comments', upload.fields([{ name: 'imageFile' }, { name: 'textFile' }
     parentId,
     message,
   } = req.body;
+
+  console.log(req.body);
+
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
 
   try {
     // Check if the user exists
