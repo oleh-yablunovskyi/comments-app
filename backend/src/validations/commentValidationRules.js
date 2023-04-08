@@ -7,12 +7,7 @@ const commentValidationRules = [
   body('email').isEmail().withMessage('Email must be a valid email address'),
   body('message').notEmpty().withMessage('Message is required'),
   body('homePage').if(body('homePage').notEmpty()).isURL().withMessage('Home page must be a valid URL'),
-  body('parentId').custom(value => {
-    if (value === null || /^\d+$/.test(value)) {
-      return true;
-    }
-    throw new Error('Parent ID must be a numerical string or null');
-  }),
+  body('parentId').optional({ nullable: true, checkFalsy: false }).isInt().withMessage('Parent ID must be an integer or null'),
 ];
 
 module.exports = commentValidationRules;
