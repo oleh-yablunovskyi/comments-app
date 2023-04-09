@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import './CommentForm.scss';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { sanitizeMessage } from '../../utils/sanitizeMessage';
 import { modules, formats } from './quillConfig';
 import { Loader } from '../Loader/Loader';
@@ -70,6 +71,13 @@ export const CommentForm: React.FC<Props> = ({
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (!formData.message) {
+      Notify.failure('Please enter a message.', { timeout: 5000 });
+
+      return;
+    }
+
     setIsLoading(true);
 
     const sanitizedMessage = sanitizeMessage(formData.message);
@@ -89,7 +97,14 @@ export const CommentForm: React.FC<Props> = ({
       }
     });
 
-    await commentsApi.createComment(payload);
+    try {
+      const response = await commentsApi.createComment(payload);
+
+      console.log('Comment submitted successfully:', response);
+    } catch (error) {
+      Notify.failure('An error occurred while submitting the comment. Please try again.', { timeout: 5000 });
+    }
+
     await onSubmitLoadComments();
 
     setCount((prevCount => prevCount + 1));
@@ -135,6 +150,8 @@ export const CommentForm: React.FC<Props> = ({
                   required
                   className="Form__input"
                   onChange={handleInputChange}
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                  title="Please enter a valid email address (example: johndoe@example.com)"
                 />
               </label>
 
@@ -165,6 +182,7 @@ export const CommentForm: React.FC<Props> = ({
                   modules={modules}
                   formats={formats}
                   theme="snow"
+                  placeholder="Enter your comment here..."
                 />
               </div>
             </div>
