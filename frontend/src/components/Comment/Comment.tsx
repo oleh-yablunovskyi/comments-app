@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import './Comment.scss';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import socket from '../../socket';
 import { CommentType } from '../../types/CommentType';
 import { commentsApi } from '../../api/comments';
 import { CommentForm } from '../CommentForm/CommentForm';
@@ -58,6 +59,23 @@ export const Comment: React.FC<Props> = React.memo(({ comment, level }) => {
 
   useEffect(() => {
     loadChildrenComments();
+  }, [id]);
+
+  useEffect(() => {
+    const handleNewComment = (newComment: CommentType) => {
+      // Check if the new comment is a direct child of the current comment
+      if (newComment.parent_comment_id === id) {
+        setChildrenComments((prevComments) => [...prevComments, newComment]);
+      }
+    };
+
+    // Add event listener for 'new_childComment' event from the WebSocket
+    socket.on('new_childComment', handleNewComment);
+
+    // Clean up the event listener when the component is unmounted
+    return () => {
+      socket.off('new_childComment', handleNewComment);
+    };
   }, [id]);
 
   const handleImageClick = () => {
@@ -161,7 +179,6 @@ export const Comment: React.FC<Props> = React.memo(({ comment, level }) => {
 
         {showForm && (
           <CommentForm
-            onSubmitLoadComments={loadChildrenComments}
             onSubmitHideForm={() => setShowForm(false)}
             parentId={id.toString()}
           />
