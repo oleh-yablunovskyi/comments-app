@@ -5,6 +5,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import ReCAPTCHA from 'react-google-recaptcha';
+import socket from '../../socket';
 import { sanitizeMessage } from '../../utils/sanitizeMessage';
 import { modules, formats } from './quillConfig';
 import { Loader } from '../Loader/Loader';
@@ -12,7 +13,6 @@ import { FormDataType } from '../../types/FormDataType';
 import { commentsApi } from '../../api/comments';
 
 interface Props {
-  onSubmitLoadComments: () => Promise<void>;
   onSubmitHideForm?: () => void;
   parentId?: string | null;
 }
@@ -28,13 +28,12 @@ const initialFormData: FormDataType = {
 };
 
 export const CommentForm: React.FC<Props> = ({
-  onSubmitLoadComments,
   onSubmitHideForm,
   parentId = null,
 }) => {
   const [formData, setFormData] = useState<FormDataType>({ ...initialFormData, parentId });
-  const [recaptchaResponse, setRecaptchaResponse] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [recaptchaResponse, setRecaptchaResponse] = useState<string | null>(null);
   const [count, setCount] = useState(0);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -115,11 +114,12 @@ export const CommentForm: React.FC<Props> = ({
       const response = await commentsApi.createComment(payload);
 
       console.log('Comment submitted successfully:', response);
+
+      // Emit event to refresh comments with the new comment data
+      socket.emit('new_comment', response);
     } catch (error) {
       Notify.failure('An error occurred while submitting the comment. Please try again.', { timeout: 5000 });
     }
-
-    await onSubmitLoadComments();
 
     setCount((prevCount => prevCount + 1));
     resetFormData();
