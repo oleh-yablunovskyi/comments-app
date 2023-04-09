@@ -11,6 +11,7 @@ const commentValidationRules = require('./validations/commentValidationRules');
 const setupDatabase = require('./main');
 const createFolderIfNotExists = require('./utils/createFolderIfNotExists');
 const upload = require('./utils/multerConfig');
+const verifyRecaptcha = require('./utils/recaptcha');
 const resizeAndSaveImage = require('./middlewares/resizeAndSaveImage');
 const saveTextFile = require('./middlewares/saveTextFile');
 
@@ -98,8 +99,17 @@ app.post('/comments', upload.fields([{ name: 'imageFile' }, { name: 'textFile' }
     homePage,
     parentId,
     message,
+    recaptchaResponse,
   } = req.body;
 
+  // Verify reCAPTCHA
+  const isRecaptchaValid = await verifyRecaptcha(recaptchaResponse);
+
+  if (!isRecaptchaValid) {
+    return res.status(400).json({ errors: [{ msg: 'Invalid reCAPTCHA' }] });
+  }
+
+  // Check for validation errors
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
