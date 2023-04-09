@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
 import './App.scss';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { CommentsList } from './components/CommentsList/CommentsList';
 import { CommentForm } from './components/CommentForm/CommentForm';
 import { Loader } from './components/Loader/Loader';
@@ -22,6 +23,11 @@ export const App: React.FC = () => {
       setTopComments(comments);
     } catch (error) {
       console.error('Error loading top comments:', error);
+
+      Notify.failure(
+        'Error loading top comments. Please try again.',
+        { timeout: 5000 },
+      );
     } finally {
       setIsLoading(false);
     }

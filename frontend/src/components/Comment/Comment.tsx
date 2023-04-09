@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
 import './Comment.scss';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { CommentType } from '../../types/CommentType';
 import { commentsApi } from '../../api/comments';
 import { CommentForm } from '../CommentForm/CommentForm';
@@ -29,19 +30,29 @@ export const Comment: React.FC<Props> = React.memo(({ comment, level }) => {
       setChildrenComments(comments);
     } catch (error) {
       console.error(`Error loading comments for comment with id ${id}:`, error);
+
+      Notify.failure(
+        `Error loading comments for comment with id ${id}. Please try again.`,
+        { timeout: 5000 },
+      );
     }
   };
 
   const loadTextFileContent = async (fileLink: string) => {
     try {
-      const response = await fetch(fileLink);
-      const text = await response.text();
+      const fileBlob = await commentsApi.getFile(fileLink);
+      const text = await fileBlob.text();
 
       return text;
     } catch (error) {
       console.error('Error loading text file:', error);
 
-      return 'Error loading text file';
+      Notify.failure(
+        'Error loading text file. Please try again.',
+        { timeout: 5000 },
+      );
+
+      return '';
     }
   };
 
@@ -55,7 +66,7 @@ export const Comment: React.FC<Props> = React.memo(({ comment, level }) => {
 
   const handleTextFileClick = async () => {
     setTextModalOpen(true);
-    const text = await loadTextFileContent(`${BASE_URL}/${text_file_link}`);
+    const text = await loadTextFileContent(`${text_file_link}`);
 
     setTextModalContent(text);
   };
