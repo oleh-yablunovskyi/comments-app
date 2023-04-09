@@ -4,6 +4,7 @@ import './CommentForm.scss';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import ReCAPTCHA from 'react-google-recaptcha';
 import { sanitizeMessage } from '../../utils/sanitizeMessage';
 import { modules, formats } from './quillConfig';
 import { Loader } from '../Loader/Loader';
@@ -32,6 +33,7 @@ export const CommentForm: React.FC<Props> = ({
   parentId = null,
 }) => {
   const [formData, setFormData] = useState<FormDataType>({ ...initialFormData, parentId });
+  const [recaptchaResponse, setRecaptchaResponse] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [count, setCount] = useState(0);
 
@@ -69,8 +71,18 @@ export const CommentForm: React.FC<Props> = ({
     setFormData(initialFormData);
   };
 
+  const handleRecaptchaChange = (value: string | null) => {
+    setRecaptchaResponse(value);
+  };
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (!recaptchaResponse) {
+      Notify.failure('Please complete the CAPTCHA.', { timeout: 5000 });
+
+      return;
+    }
 
     if (!formData.message) {
       Notify.failure('Please enter a message.', { timeout: 5000 });
@@ -96,6 +108,8 @@ export const CommentForm: React.FC<Props> = ({
         payload.append(key, value);
       }
     });
+
+    payload.append('recaptchaResponse', recaptchaResponse);
 
     try {
       const response = await commentsApi.createComment(payload);
@@ -217,6 +231,13 @@ export const CommentForm: React.FC<Props> = ({
                   onChange={handleTextFileUpload}
                 />
               </label>
+            </div>
+
+            <div className="Form__captcha">
+              <ReCAPTCHA
+                sitekey="6LfMP3ElAAAAAOflJaX40X36kjx_xqOh1zVcDimq"
+                onChange={handleRecaptchaChange}
+              />
             </div>
 
             <button type="submit" className="Form__submitButton">Submit</button>
