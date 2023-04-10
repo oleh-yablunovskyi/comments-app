@@ -8,7 +8,7 @@ import { commentsApi } from '../../api/comments';
 import { CommentForm } from '../CommentForm/CommentForm';
 import { ModalWindow } from '../ModalWindow/ModalWindow';
 
-const BASE_URL = 'https://comments-app-server.onrender.com';
+const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:5000';
 
 interface Props {
   comment: CommentType;
