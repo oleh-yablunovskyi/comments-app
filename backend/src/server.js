@@ -54,7 +54,17 @@ app.get('/comments', async(req, res) => {
       offset: (page - 1) * perPage,
     });
 
-    res.send(topLevelComments);
+    // Fetch the total count of top-level comments
+    const total = await Comment.count({
+      where: {
+        parent_comment_id: null,
+      },
+    });
+
+    res.send({
+      data: topLevelComments,
+      total: total,
+    });
   } catch (error) {
     console.error('Error fetching top-level comments:', error);
     res.status(500).send(`Internal server error: ${error.message}`);
