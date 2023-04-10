@@ -41,6 +41,15 @@ button {
   outline: none;
 }
 
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .container {
   max-width: 1000px;
   padding: 0 20px;

@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import axios from 'axios';
-import { CommentType } from '../types/CommentType';
+import { CommentsResponse, CommentType } from '../types/CommentType';
 
 const BASE_URL = 'https://comments-app-server.onrender.com';
 // const BASE_URL = 'http://localhost:5000';
@@ -10,7 +10,7 @@ const getTopComments = async (
   sortOrder: string,
   page: number,
   // perPage: number,
-): Promise<CommentType[]> => {
+): Promise<CommentsResponse> => {
   const response = await axios
     .get(`${BASE_URL}/comments?sortBy=${sortBy}&sortOrder=${sortOrder}&page=${page}`);
 
