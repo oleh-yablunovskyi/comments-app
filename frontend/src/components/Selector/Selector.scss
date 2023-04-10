@@ -1,0 +1,23 @@
+.Selector {
+  display: block;
+  width: 100%;
+  padding: 12px;
+
+  background-image: url('./icons/icon-Chevron-Arrow-Down.svg');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  border: 1px solid #b4bdc4;
+  appearance: none;
+  color: #313237;
+  font-size: 14px;
+
+  cursor: pointer;
+
+  &:hover {
+    border-color: #89939a;
+  }
+
+  &__option {
+    color: #89939a;
+  }
+}
