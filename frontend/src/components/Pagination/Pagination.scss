@@ -1,0 +1,60 @@
+.Pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 64px;
+
+  &__list {
+    display: flex;
+    padding-bottom: 16px;
+  }
+
+  &__link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 4px;
+    height: 32px;
+    width: 32px;
+
+    // text-align: center;
+    border: 1px solid #b4bdc3;
+
+    &_prev {
+      margin-right: 16px;
+      border-color: #b4bdc3;
+
+      &::after {
+        content: url('./icons/icon-Chevron-Arrow-Left.svg');
+      }
+    }
+
+    &_next {
+      margin-left: 16px;
+      border-color: #b4bdc3;
+
+      &::after {
+        content: url('./icons/icon-Chevron-Arrow-Right.svg');
+      }
+    }
+
+    &:hover {
+      border-color: #313237;
+      cursor: pointer;
+    }
+
+    &_active {
+      background-color: #313237;
+      color: #fff;
+    }
+
+    &_disabled {
+      border-color: #b4bdc3;
+
+      &:hover {
+        border-color: #b4bdc3;
+        cursor: default;
+      }
+    }
+  }
+}

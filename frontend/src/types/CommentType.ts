@@ -1,3 +1,8 @@
+export interface CommentsResponse {
+  data: CommentType[];
+  total: number;
+}
+
 export interface CommentType {
   id: number;
   parent_comment_id: number | null;

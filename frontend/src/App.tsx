@@ -10,9 +10,11 @@ import { Loader } from './components/Loader/Loader';
 import { commentsApi } from './api/comments';
 import { CommentType } from './types/CommentType';
 import { SelectorsPanel } from './components/SelectorsPanel/SelectorsPanel';
+import { Pagination } from './components/Pagination/Pagination';
 
 export const App: React.FC = () => {
   const [topComments, setTopComments] = useState<CommentType[]>([]);
+  const [total, setTotal] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
   const [searchParams] = useSearchParams();
@@ -29,7 +31,8 @@ export const App: React.FC = () => {
 
       console.log('Loaded topComments:', comments);
 
-      setTopComments(comments);
+      setTopComments(comments.data);
+      setTotal(comments.total);
     } catch (error) {
       console.error('Error loading top comments:', error);
 
@@ -121,6 +124,8 @@ export const App: React.FC = () => {
         <div className="App__bottom">
           <CommentForm />
         </div>
+
+        <Pagination total={total} />
       </div>
     </div>
   );
