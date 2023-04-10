@@ -169,5 +169,149 @@
   "created_at": "2023-03-21T19:45:00.000Z",
   "image_link": null,
   "text_file_link": null
-  }
+  },
+  {
+  "id": 24,
+  "parent_comment_id": null,
+  "user_id": 1,
+  "text": "I recently discovered a new hiking trail near my house and it was so beautiful! Exploring new places is always an adventure.",
+  "created_at": "2023-03-15T12:30:00.000Z",
+  "image_link": null,
+  "text_file_link": null
+  },
+  {
+  "id": 25,
+  "parent_comment_id": null,
+  "user_id": 2,
+  "text": "I'm planning to try a new recipe for dinner tonight. Cooking is a great way to unwind and get creative in the kitchen!",
+  "created_at": "2023-03-16T09:15:00.000Z",
+  "image_link": null,
+  "text_file_link": null
+  },
+  {
+  "id": 26,
+  "parent_comment_id": null,
+  "user_id": 3,
+  "text": "I've been practicing meditation every morning and it's helped me start the day with a clear and focused mind.",
+  "created_at": "2023-03-16T11:00:00.000Z",
+  "image_link": null,
+  "text_file_link": null
+  },
+  {
+  "id": 27,
+  "parent_comment_id": null,
+  "user_id": 4,
+  "text": "I just finished a great book on entrepreneurship and it's inspired me to start my own business someday!",
+  "created_at": "2023-03-16T13:45:00.000Z",
+  "image_link": null,
+  "text_file_link": null
+  },
+  {
+  "id": 28,
+  "parent_comment_id": null,
+  "user_id": 5,
+  "text": "I'm planning to volunteer at a local shelter this weekend. Giving back to the community is so important!",
+  "created_at": "2023-03-16T16:30:00.000Z",
+  "image_link": null,
+  "text_file_link": null
+  },
+  {
+  "id": 29,
+  "parent_comment_id": null,
+  "user_id": 1,
+  "text": "I love listening to podcasts on a variety of topics, from science to true crime. It's a great way to learn something new and pass the time!",
+  "created_at": "2023-03-16T18:15:00.000Z",
+  "image_link": null,
+  "text_file_link": null
+  },
+  {
+  "id": 30,
+  "parent_comment_id": null,
+  "user_id": 2,
+  "text": "I just bought a new plant for my apartment and it's already making the space feel more alive and vibrant!",
+  "created_at": "2023-03-17T10:00:00.000Z",
+  "image_link": null,
+  "text_file_link": null
+  },
+  {
+  "id": 31,
+  "parent_comment_id": null,
+  "user_id": 3,
+  "text": "I'm excited to attend a live music show tonight. There's something so energizing about experiencing music in person!",
+  "created_at": "2023-03-17T12:00:00.000Z",
+  "image_link": null,
+  "text_file_link": null
+  },
+  {
+    "id": 32,
+    "parent_comment_id": null,
+    "user_id": 4,
+    "text": "I've been taking a cooking class and it's been so fun and educational! I can't wait to try out some new recipes at home.",
+    "created_at": "2023-03-17T14:30:00.000Z",
+    "image_link": null,
+    "text_file_link": null
+    },
+    {
+    "id": 33,
+    "parent_comment_id": null,
+    "user_id": 5,
+    "text": "I've been practicing my photography skills by taking pictures of my travels. It's so rewarding to capture and share beautiful moments.",
+    "created_at": "2023-03-18T08:45:00.000Z",
+    "image_link": null,
+    "text_file_link": null
+    },
+    {
+    "id": 34,
+    "parent_comment_id": null,
+    "user_id": 1,
+    "text": "I recently started journaling before bed and it's helped me reflect on my day and set intentions for the next.",
+    "created_at": "2023-03-18T11:15:00.000Z",
+    "image_link": null,
+    "text_file_link": null
+    },
+    {
+    "id": 35,
+    "parent_comment_id": null,
+    "user_id": 2,
+    "text": "I'm looking forward to trying a new coffee shop this weekend. Trying new cafes is one of my favorite things to do!",
+    "created_at": "2023-03-19T09:00:00.000Z",
+    "image_link": null,
+    "text_file_link": null
+    },
+    {
+    "id": 36,
+    "parent_comment_id": null,
+    "user_id": 3,
+    "text": "I've been rewatching some of my favorite movies and it's been such a nostalgic and comforting experience.",
+    "created_at": "2023-03-20T14:00:00.000Z",
+    "image_link": null,
+    "text_file_link": null
+    },
+    {
+    "id": 37,
+    "parent_comment_id": null,
+    "user_id": 4,
+    "text": "I'm planning to go on a road trip next month and I'm so excited to explore new places and make some great memories!",
+    "created_at": "2023-03-21T10:30:00.000Z",
+    "image_link": null,
+    "text_file_link": null
+    },
+    {
+    "id": 38,
+    "parent_comment_id": null,
+    "user_id": 5,
+    "text": "I love to read books by diverse authors to broaden my perspectives and gain new insights.",
+    "created_at": "2023-03-21T13:45:00.000Z",
+    "image_link": null,
+    "text_file_link": null
+    },
+    {
+    "id": 39,
+    "parent_comment_id": null,
+    "user_id": 1,
+    "text": "I'm planning to take a dance class next week to challenge myself and learn something new!",
+    "created_at": "2023-03-22T11:00:00.000Z",
+    "image_link": null,
+    "text_file_link": null
+    }
 ]
