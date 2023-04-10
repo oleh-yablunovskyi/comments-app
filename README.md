@@ -13,13 +13,13 @@ A single-page application (SPA) for displaying, creating, and managing comments 
 
 - Display top-level comments and their child comments with support for plain text and certain HTML tags
 - Create new comments with support for uploading images and text files
+- Express.js API for handling backend requests
+- WebSockets for real-time updates
 - Robust validation for comment input on both frontend and backend
 - Images are automatically resized to a specified size on the server
-- WebSockets for real-time updates
-- Express.js API for handling backend requests
-- Google reCAPTCHA integration for form validation
 - Sort comments by different criteria
 - Pagination for efficient navigation through comments
+- Google reCAPTCHA integration for form validation
 
 ## Getting Started
 
@@ -42,8 +42,11 @@ REACT_APP_BASE_URL=http://localhost:5000
 - React for the frontend
 - Express.js for the backend
 - PostgreSQL for the database
+- WebSockets for real-time updates
 - Multer for handling file uploads
 - Sharp for resizing uploaded images on server
-- Google reCAPTCHA for form validation
-- WebSockets for real-time updates
+- Express-validator for data validation on server
+- ReactQuill for text editor
+- Sanitize-html for sanitization of form message
 - React Router for routing and sorting options
+- Google reCAPTCHA form form validation
