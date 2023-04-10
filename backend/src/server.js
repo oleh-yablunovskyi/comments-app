@@ -14,6 +14,7 @@ const setupDatabase = require('./main');
 const createFolderIfNotExists = require('./utils/createFolderIfNotExists');
 const upload = require('./utils/multerConfig');
 const verifyRecaptcha = require('./utils/recaptcha');
+const { getOrder } = require('./utils/getOrder');
 const resizeAndSaveImage = require('./middlewares/resizeAndSaveImage');
 const saveTextFile = require('./middlewares/saveTextFile');
 
@@ -48,7 +49,7 @@ app.get('/comments', async(req, res) => {
           as: 'author',
         },
       ],
-      order: [[sortBy, sortOrder]],
+      order: [getOrder(sortBy, sortOrder)],
       limit: perPage,
       offset: (page - 1) * perPage,
     });
