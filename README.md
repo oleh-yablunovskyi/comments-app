@@ -15,11 +15,11 @@ A single-page application (SPA) for displaying, creating, and managing comments 
 - Create new comments with support for uploading images and text files
 - Robust validation for comment input on both frontend and backend
 - Images are automatically resized to a specified size on the server
-- Google reCAPTCHA integration for form validation
-- Sort comments by different criteria (e.g., date, popularity)
-- Pagination for efficient navigation through comments
 - WebSockets for real-time updates
 - Express.js API for handling backend requests
+- Google reCAPTCHA integration for form validation
+- Sort comments by different criteria
+- Pagination for efficient navigation through comments
 
 ## Getting Started
 
@@ -29,13 +29,13 @@ A single-page application (SPA) for displaying, creating, and managing comments 
 
 ## Running the App
 
-1. Start the backend server by running `npm start` in the `backend` directory.
-2. Start the frontend server by running `npm start` in the `frontend` directory.
-3. Open your browser and navigate to `http://localhost:3000` (or the appropriate port if different).
-4. Create a `.env` file in the `frontend` directory with the following content:
+1. Create a `.env` file in the `frontend` directory with the following content:
 ``` console
 REACT_APP_BASE_URL=http://localhost:5000
 ```
+2. Start the backend server by running `npm start` in the `backend` directory.
+3. Start the frontend server by running `npm start` in the `frontend` directory.
+4. Open your browser and navigate to `http://localhost:3000` (or the appropriate port if different).
 
 ## Technology Stack
 
