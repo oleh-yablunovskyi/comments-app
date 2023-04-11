@@ -174,7 +174,7 @@ export const Comment: React.FC<Props> = React.memo(({ comment, level }) => {
           className="Comment__answerButton"
           onClick={() => setShowForm((prevState) => !prevState)}
         >
-          {showForm ? '— Answer' : 'Answer'}
+          {showForm ? '— Hide form' : 'Reply to comment'}
         </button>
 
         {showForm && (

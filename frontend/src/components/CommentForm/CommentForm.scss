@@ -18,7 +18,11 @@
 
   &__caption {
     margin-bottom: 7px;
-    font-size: 14px;
+    font-size: 16px;
+  }
+
+  &__required {
+    color: #db0107;
   }
 
   &__label {
@@ -34,6 +38,15 @@
     border: 1px solid #ccc;
     border-radius: 3px;
     font-size: 16px;
+
+    &--invalid {
+      border-color: red;
+      outline-color: red;
+    }
+
+    &::placeholder {
+      font-size: 14px;
+    }
   }
 
   &__textarea {

@@ -34,6 +34,8 @@ export const CommentForm: React.FC<Props> = ({
   const [formData, setFormData] = useState<FormDataType>({ ...initialFormData, parentId });
   const [isLoading, setIsLoading] = useState(false);
   const [recaptchaResponse, setRecaptchaResponse] = useState<string | null>(null);
+  const [isUserNameValid, setIsUserNameValid] = useState(true);
+  const [isEmailValid, setIsEmailValid] = useState(true);
   const [count, setCount] = useState(0);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,6 +74,18 @@ export const CommentForm: React.FC<Props> = ({
 
   const handleRecaptchaChange = (value: string | null) => {
     setRecaptchaResponse(value);
+  };
+
+  const validateUserName = (value: string) => {
+    const isValid = value.match(/^[A-Za-z0-9 ]+$/);
+
+    setIsUserNameValid(!!isValid);
+  };
+
+  const validateEmail = (value: string) => {
+    const isValid = value.match(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/);
+
+    setIsEmailValid(!!isValid);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -141,31 +155,40 @@ export const CommentForm: React.FC<Props> = ({
             <h2 className="Form__title">Add Your Comment</h2>
             <div className="Form__group">
               <label htmlFor="username" className="Form__label">
-                <p className="Form__caption">User Name (required):</p>
+                <p className="Form__caption">
+                  User Name
+                  <span className="Form__required">*</span>
+                </p>
 
                 <input
                   type="text"
                   id="userName"
                   required
-                  pattern="[A-Za-z0-9 ]+"
-                  className="Form__input"
+                  className={`Form__input ${!isUserNameValid ? 'Form__input--invalid' : ''}`}
                   onChange={handleInputChange}
+                  onBlur={(e) => validateUserName(e.target.value)}
+                  placeholder="John Doe"
                 />
               </label>
             </div>
 
             <div className="Form__group">
               <label htmlFor="email" className="Form__label">
-                <p className="Form__caption">E-mail (required):</p>
+                <p className="Form__caption">
+                  E-mail
+                  <span className="Form__required">*</span>
+                </p>
 
                 <input
                   type="email"
                   id="email"
                   required
-                  className="Form__input"
+                  // className="Form__input"
+                  className={`Form__input ${!isEmailValid ? 'Form__input--invalid' : ''}`}
                   onChange={handleInputChange}
-                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                  onBlur={(e) => validateEmail(e.target.value)}
                   title="Please enter a valid email address (example: johndoe@example.com)"
+                  placeholder="johndoe@gmail.com"
                 />
               </label>
 
@@ -173,20 +196,24 @@ export const CommentForm: React.FC<Props> = ({
 
             <div className="Form__group">
               <label htmlFor="homepage" className="Form__label">
-                <p className="Form__caption">Home page (optional):</p>
+                <p className="Form__caption">Home page</p>
 
                 <input
                   type="url"
                   id="homePage"
                   className="Form__input"
                   onChange={handleInputChange}
+                  placeholder="https://myhomepage.com/"
                 />
               </label>
             </div>
 
             <div className="Form__group">
               <label htmlFor="message" className="Form__label">
-                <p className="Form__caption">Text (required):</p>
+                <p className="Form__caption">
+                  Text
+                  <span className="Form__required">*</span>
+                </p>
               </label>
 
               <div className="Form__messageBlock">
