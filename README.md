@@ -2,8 +2,6 @@
 
 A single-page application (SPA) for displaying, creating, and managing comments built using React, Express.js, and PostgreSQL.
 
-Demo-link: https://oleh-yablunovskyi.github.io/comments-app/
-
 ## Table of Contents
 
 - [Features](#features)
